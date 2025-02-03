@@ -47,7 +47,7 @@
 <body>
 
     <h1>Will you be my Valentine?</h1>
-    <img id="dogGif" src="https://media1.tenor.com/m/K7MYtjJ02x4AAAAd/flowers-puppy.gif" alt="Dog with a flower">
+    <img id="dogGif" src="https://media1.tenor.com/m/K7MYtjJ02x4AAAAd/flowers-puppy.gif" alt="Initial GIF">
     <button id="yesButton">Yes</button>
     <button id="noButton">No</button>
     <div id="response" style="margin-top: 20px;"></div>
@@ -56,6 +56,12 @@
         const yesButton = document.getElementById('yesButton');
         const noButton = document.getElementById('noButton');
         const response = document.getElementById('response');
+        const gifImage = document.getElementById('dogGif');
+
+        // GIF URLs
+        const yesGif = "https://media1.tenor.com/m/WsWej1C3ePYAAAAC/yippee-cat-kitty.gif"; // GIF for Yes
+        const noGif = "https://media1.tenor.com/m/9TbePALx4uAAAAAd/wheniwasolder.gif"; // GIF for No
+        const defaultGif = "https://media.giphy.com/media/3o7aD2sa1g1g0g1g0I/giphy.gif"; // Default GIF
 
         let noButtonTexts = ["No", "Are you sure baby?", "May yes dyan", "Naaaahhh", "Lah wag pls", "Wag haha", "Iiyac na ko", "AAAAA"];
         let noButtonIndex = 0;
@@ -67,6 +73,7 @@
         yesButton.addEventListener('click', () => {
             response.innerHTML = "Hehe I knew it, I love you baby";
             noButton.style.display = 'none'; // Hide the no button
+            gifImage.src = yesGif; // Change GIF for Yes
         });
 
         noButton.addEventListener('click', () => {
@@ -87,12 +94,14 @@
             const randomY = Math.random() * (window.innerHeight - 50); // 50 is the button height
             noButton.style.position = 'absolute';
             noButton.style.left = `${randomX}px`;
-            noButton.style.top = `${randomY}px`;
+            noButton.style.top = `${ randomY}px`;
 
-            // Prevent the no button from getting too small
-            if (noScale < 0.5) {
-                noScale = 0.5; // Set a minimum scale
-            }
+            gifImage.src = noGif; // Change GIF for No
+        });
+
+        // Change to default GIF when no button is pressed
+        document.addEventListener('mouseup', () => {
+            gifImage.src = defaultGif; // Revert to default GIF
         });
     </script>
 
