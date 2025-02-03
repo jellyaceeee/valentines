@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Proposal</title>
+    <style>
+        body {
+            background-color: pink;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 5px;
+            transition: transform 0.3s; /* Smooth transition for scaling */
+        }
+        #yesButton {
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        #noButton {
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        #dogGif {
+            margin: 20px 0;
+            width: 300px; /* Adjust the size as needed */
+            border-radius: 10px; /* Optional: add some rounding to the corners */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Will you be my Valentine?</h1>
+    <img id="dogGif" src="https://media1.tenor.com/m/K7MYtjJ02x4AAAAd/flowers-puppy.gif" alt="Dog with a flower">
+    <button id="yesButton">Yes</button>
+    <button id="noButton">No</button>
+    <div id="response" style="margin-top: 20px;"></div>
+
+    <script>
+        const yesButton = document.getElementById('yesButton');
+        const noButton = document.getElementById('noButton');
+        const response = document.getElementById('response');
+
+        let noButtonTexts = ["No", "Are you sure baby?", "May yes dyan", "Naaaahhh", "Lah wag pls", "Wag haha", "Iiyac na ko", "AAAAA"];
+        let noButtonIndex = 0;
+
+        // Initial scale factors
+        let yesScale = 1;
+        let noScale = 1;
+
+        yesButton.addEventListener('click', () => {
+            response.innerHTML = "Hehe I knew it, I love you baby";
+            noButton.style.display = 'none'; // Hide the no button
+        });
+
+        noButton.addEventListener('click', () => {
+            // Change the no button text
+            noButton.innerText = noButtonTexts[noButtonIndex];
+            noButtonIndex = (noButtonIndex + 1) % noButtonTexts.length;
+
+            // Incrementally change sizes
+            yesScale += 0.1; // Increase the scale of the yes button
+            noScale -= 0.1; // Decrease the scale of the no button
+
+            // Apply the new scales
+            yesButton.style.transform = `scale(${yesScale})`;
+            noButton.style.transform = `scale(${noScale})`;
+
+            // Move the no button to a random position
+            const randomX = Math.random() * (window.innerWidth - 100); // 100 is the button width
+            const randomY = Math.random() * (window.innerHeight - 50); // 50 is the button height
+            noButton.style.position = 'absolute';
+            noButton.style.left = `${randomX}px`;
+            noButton.style.top = `${randomY}px`;
+
+            // Prevent the no button from getting too small
+            if (noScale < 0.5) {
+                noScale = 0.5; // Set a minimum scale
+            }
+        });
+    </script>
+
+</body>
+</html>
